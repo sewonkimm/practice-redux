@@ -1,8 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Redux 배우기
 
-## Available Scripts
+> [공식문서 읽기](https://ko.redux.js.org/)
+## React Redux 앱 만들기
 
-In the project directory, you can run:
+```bash
+npx create-react-app my-app --template redux
+```
+
+CRA를 위한 공식 Redux+JS 템플릿을 사용하면 RTK(Redux Toolkit)을 사용할 수 있는 redux 앱이 만들어진다.
+이미 있는 프로젝트에 RTK를 설치해야한다면 `npm install @reduxjs/toolkit` 명령어로 패키지를 받아 사용해야한다.
+
+## Project 시작하기
 
 ### `yarn start`
 
@@ -36,9 +44,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
