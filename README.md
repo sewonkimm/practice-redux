@@ -12,35 +12,69 @@ CRA를 위한 공식 Redux+JS 템플릿을 사용하면 RTK(Redux Toolkit)을 �
 
 ## Project 시작하기
 
-### `yarn start`
+```bash
+yarn start
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Redux 기본 개념
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+1. Store : state가 저장되어 있는 단 하나의 공간
+2. Action : Store의 상태를 변경할 수 있는 단 한가지 방법
+3. Reducer : Action이 어떻게 Store를 변경할 것인지 명시한 것. 우리가 작성해야할 부분
 
-### `yarn test`
+### Store
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 보통 하나의 Store에서 하나의 root reducer 함수를 가지는 형태.
+- 앱이 커지면 root reducer를 작은 reducer로 나눌 수 있음.
+- `getState()` 함수로 state에 접근. selector 패턴을 사용하면 필요한 state만 가져와 효율성 증가.
+- `dispatch()` 함수로 store를 갱신. 인자로 action을 넘겨줌. dispatch를 event trigger라고 생각해도 무방.
+- 
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Action 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```javascript
+store.dispatch({ type: 'ACTION' })
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// action 예제 
+const addAction = {
+    type: 'todos/todoAdded',
+    payload: 'Study Redux'
+}
 
-### `yarn eject`
+// action creator 예제
+const addTodo = text => {
+    return {
+        type: 'todos/todoAdded',
+        payload: 'Study Redux'
+    }
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- action은 type 필드를 가진 js object
+- action object가 가진 추가 정보는 payload라고 부름
+- action creator는 action object를 반환하는 함수
+- 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Reducer⭐
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```javascript
+(state, action) => newState
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+// 예제
+const initialState = { value: 0 }
+
+function counterReducer(state = initialState, action) {
+  if (action.type === 'counter/increment') {
+    return {
+      ...state,
+      value: state.value + 1
+    }
+  }
+  return state
+}
+```
+
+- Array.reduce() 함수에서 유래한 명칭
+- 반드시 현재 state 값을 기반으로 **immutable update**를 해야함
+- async login, random한 value 계산 등을 허용하지 않음
